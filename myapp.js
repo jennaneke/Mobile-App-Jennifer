@@ -1,4 +1,3 @@
-# Mobile-App-Jennifer
 var myApp = angular.module('myApp', ['ionic']);
 
 myApp.controller('name-two', function($scope){
