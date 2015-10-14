@@ -1,15 +1,26 @@
-var firstApp = angular.module('firstApp', ['ionic', "App.Services"]);
+var firstApp = angular.module('firstApp', ['ionic', "App.Services", "App.Controllers"])
 
 firstApp.controller('firstController', function ($scope, ParseService) {
-
-	$scope.itemsList = [];
+	$scopeItemList = [];
 	$scope.inputItem = {
-		"value": "",
-		"name": "",
-		"room": ""
+    value: "",
+    name: "",
+    room: ""
+};
+	
+	ParseService.login().then( function loginSuccess(_LoggedInuser) {
+		alert ("User logged in" + _LoggedInuser.username);
 
-	};
-	$scope.editObject = function ediObject (_object) {
+		return ParseService.getAllObjects();
+	
+	}).then(function getObjectsSuccess(_objectData) {
+		$scopeItemList = _objectData.results;
+	}, function error (_error) {
+		alert ("error" + _error);
+	});
+	});
+
+	$scope.editObject = function editObject (_object) {
 		// why is _object in () we didnt do that for new item
 		
 		var data = null;
@@ -17,6 +28,7 @@ firstApp.controller('firstController', function ($scope, ParseService) {
 		var objectData = prompt("Enter the Edited Information", _object.name + "," + _object.room);
 
 		if (objectData != null) {
+			//
 			data = objectData.split(",");
 		}
 
@@ -94,17 +106,48 @@ $scope.deleteObject = function editObject(_objectId) {
 		return ParseService.getAllObjects ();
 	}
 
+ 
+ 
+ 
+ 
 	
+firstApp.config( function($stateprovider,  $urlRouterProvider) {
+	
+	$urlRouterProvider.otherwise("/home");
 
+	$stateProvider 
+		.state("home", {
+			url:"/home",
+			templateUrl: "views/home.html",
+			controller: "homeCtrl"
+		})
+	    .state("detail", {
+	    	url: "/detail",
+	    	templateUrl: "views/detail.html",
+	    	controller: "detailCtrl"
+	    });
 
-   ParseService.login().then (function (_LoggedInuser) {
-   	alert("user logged in" + _LoggedInuser.username);
-   	return populateList();
-   }).then(function (_listdata) {
-   	$scope.itemsList = _listdata.results
-   }
-   )
+});
+
+  
+
+myApp.config(function($stateProvider, $urlRouterProvider) {
+  //
+  // For any unmatched url, redirect to /home
+  $urlRouterProvider.otherwise("/home");
+  //
+  // Now set up the states
+  $stateProvider
+    .state('home', {
+      url: "/home",
+      templateUrl: "views/home.html",
+      controller :"homeCtrl"
+    })
+    .state('detail', {
+      url: "/detail",
+      templateUrl: "views/detail.html",
+      controller :"detailCtrl"  
+    });
+});
+
  
- 
- 
- })
