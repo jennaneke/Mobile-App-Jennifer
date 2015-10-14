@@ -7,12 +7,11 @@
             var baseURL = "https://api.parse.com/1/";
             var authenticationHeaders = PARSE__HEADER_CREDENTIALS;
 
-            // these are functions exposed to public
             return {
                 /**
                  * default function for logging in user
                  */
-                login: function () {
+                login: function login () {
 
                     var settings = {
                         //dont get this part below
@@ -24,7 +23,6 @@
                             "password": "test"
                         }
                     };
-
                     // $http returns a promise, which has a then function,
                     // which also returns a promise
                     return $http.get(baseURL + 'login', settings)
@@ -33,12 +31,13 @@
                             // check the console to see all of the data returned
                             console.log('login', response);
                             return response.data;
-                        });
+                });
+
                 },
                 /**
                  * returns all of the data
                  */
-                getAllObjects: function (_id) {
+                getAllObjects: function (getAllObjects) {
 
                     var settings = {
                         headers: authenticationHeaders
@@ -57,25 +56,8 @@
                 /**
                  * returns individual object by Id
                  */
-                getObjectById: function (_id) {
 
-                    var settings = {
-                        headers: authenticationHeaders
-                    };
-
-                    // $http returns a promise, which has a then function,
-                    // which also returns a promise
-                    return $http.get(baseURL + 'classes/stuff/' + _id, settings)
-                        .then(function (response) {
-                            // In the response resp.data contains the result
-                            // check the console to see all of the data returned
-                            console.log('getObjectById', response);
-                            return response.data;
-                        });
-                },
-                
-
-                addObject: function (_params) {
+                 addObject: function (_params) {
 
                 	var settings = {
                 		headers: authenticationHeaders
@@ -90,7 +72,7 @@
 
                 	var dataObjectString = JSON.stringify(dataObject);
 
-                	return $http.post(baseURL + 'classes/stuff' + settings, dataObjectString)
+                	return $http.post(baseURL + 'classes/stuff' + dataObjectString, settings)
                 		.then(function (response) {
 
                 			console.log('addObject', response);
@@ -99,7 +81,7 @@
 
                 		});
                 },
-
+                
                 updateObject: function (_params) {
 
                 	var settings = {
@@ -138,7 +120,24 @@
                 			return response.data	
                 		});
                 },
-            }
+                getObjectById: function (_id) {
+
+                    var settings = {
+                        headers: authenticationHeaders
+                    };
+
+                    // $http returns a promise, which has a then function,
+                    // which also returns a promise
+                    return $http.get(baseURL + 'classes/stuff/' + _id, settings)
+                        .then(function (response) {
+                            // In the response resp.data contains the result
+                            // check the console to see all of the data returned
+                            console.log('getObjectById', response);
+                            return response.data;
+                        });
+                }
+               
+             }
 
         })
 })();
