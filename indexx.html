@@ -1,22 +1,26 @@
 <!DOCTYPE html>
-<html ng-app="app">
-
+<html  ng-app="firstApp">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, 
                    user-scalable=no, width=device-width">
-    <link href="http://code.ionicframework.com/1.1.0/css/ionic.min.css" rel="stylesheet">
-    <script src="http://code.ionicframework.com/1.1.0/js/ionic.bundle.js"></script>
-    <script src="controllers.js"></script>
+    <link href="http://code.ionicframework.com/1.0.0/css/ionic.min.css" rel="stylesheet">
+    <script src="http://code.ionicframework.com/1.0.0/js/ionic.bundle.js"></script>
+    <!-- include the javascript app.js source file -->
+    <script src="credentials.js"></script>
     <script src="app.js"></script>
+    <script src="services.js"></script>
+    <script src="controllers.js"></script>
 </head>
 
 <body>
+    <!-- render the header with back button support -->
     <ion-nav-bar class='bar-positive'>
         <ion-nav-back-button class="button-clear">
             <i class="ion-arrow-left-c"></i> Back
         </ion-nav-back-button>
     </ion-nav-bar>
+    <!-- content from ui-router rendered here -->
     <ion-nav-view animation="slide-left-right"></ion-nav-view>
 </body>
 </html>
