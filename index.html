@@ -14,46 +14,41 @@
 <body ng-controller="firstController">
    <!-- add some ionic style with header -->
    <ion-header-bar class="bar-royal">
-        <h1 class="title">Jenns Page</h1>
+        <h1 class="title">Jenns Page $http</h1>
    </ion-header-bar>
    <!-- ionic content area -->
    <ion-content class="padding">
       <ion-list>
-      <ion-item class="item-divider">Quick Add</ion-item>
-  
-
-   <div class="item-input">
-    <label class="item-input-wrapper">
+    <ion-item class="item-divider">Quick Add</ion-item>
+      <item class="item-input">
+      <label class="item-input-wrapper">
         <!-- enter values separated by coma -->
         <input type="text" placeholder="name, room" ng-model="inputItem.value">
-    </label>
-    <button class="button button-clear" ng-click="addItem()">ADD
-    </button>
-  </div>
-         <!-- add a section header -->
-         <div class="bar bar-header">
-  <h1 class="title">Howard University School of Business</h1>
-</div>
-<div class="bar bar-header bar-energized">
-  <h1 class="title">Lookup</h1>
-</div>
-         <ion-item class="item-divider">Some Stuff Data</ion-item>
-        <!-- iterate thru the list, use item.objectId as item identifier -->
-        <ion-item ng-repeat="item in itemsList track by item.objectId">
-        <div>{{item.objectId}}</div>
-        <div style="text-transform:capitalize;">
-        {{item.name }} {{item.room}}
-        </div>
+       </label>
+       <button class="button button-clear" ng-click="addItem()">ADD
+       </button>
+       </item>
+
+      <ion-item class="item-divider">Some Users</ion-item>
+      <ion-item ng-repeat="items in itemsList track by item.objectId">
+      <div> {{item.objectId}} </div>
+      <div style="text transformation:capitalize;">
+        {{item.name}} {{item.room}}
+      </div>
+      <div>
         <div class="text-right">
-        <button class="ion-edit button"
-                ng-click="editObject(item)">
-        </button>
+          <button class="ion-edit button"
+            ng-click="editObject(item)">
+          </button>
         <button class="ion-minus-circled button"
-                ng-click="deleteObject(item.objectId)">
+          ng-click="deleteObject(item.objectId)">
         </button>
-        </div>
-            </ion-item>
-      </ion-list>
-   </ion-content>
+      </div>
+
+    </ion-item>
+    <ion-list> 
+  </ion-content>
+
+
 </body>
 </html>
